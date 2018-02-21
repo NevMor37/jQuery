@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JQuery_Effects</title>
+    <script src = "jquery-3.3.1.min.js"></script>
+    <script>
+             $("document").ready(function(){
+
+               $("button.fade_in").click(function(){
+                     /*
+                     $("#div1").fadeIn();
+                     $("#div2").fadeIn("slow");
+                     $("#div3").fadeIn(3000);*/
+                     //.fadeOut();
+                     $("#div1").fadeToggle();
+                     $("#div2").fadeToggle("slow");
+                     $("#div3").fadeToggle(3000);
+                     /*
+                       .fadeTo(speed, opacity(0-1), callback);
+                      */
+                 });
+                 //Slide Effect
+                 $("#flip").click(function(){
+                     $("#panel").slideDown(7000);
+                 });
+
+                 $("#stop").click(function(){
+                     $("#panel").stop();
+                 });
+                 $("#testAnimation").click(function(){
+                        $(this).animate({
+                            left :'250px',
+                            width : '+=150px',
+                            height:'+=150px',  //'show', 'hide', 'toggle'
+                            opacity:'0.5'
+                        });
+                     });
+
+                     $("#testAnimation2").click(function(){
+                         var div = $(this);
+                         div.animate({height: '300px', opacity: '0.4'}, "slow");
+                         div.animate({width: '300px', opacity: '0.8'}, "slow");
+                         div.animate({height: '100px', opacity: '0.4'}, "slow");
+                         div.animate({width: '100px', opacity: '0.8'}, "slow");
+
+                     });
+             });
+
+             /*
+             JavaScript statements are executed line by line. However, with effects, the next line of code can be run even though
+             the effect is not finished. This can create errors.
+             To prevent this, you can create a callback function.
+             A callback function is executed after the current effect is finished.
+             Typical syntax: $(selector).hide(speed,callback);
+             */
+        </script>
+    <style type="text/css">
+        #flip{
+            padding : 5px;
+            background-color: #e5eecc;
+            text-align: center;
+            border : solid 1px;
+        }
+    </style>
+</head>
+<body>
+<button type = "button" class = "fade_in">Click here to demonstrate fade in boxes</button><br />
+<div id = "div1" style = "width:80px;height:80px;display:none;background-color:red;"></div>
+<div id = "div2" style = "width:80px;height:80px;display:none;background-color:green;"></div>
+<div id = "div3" style = "width:80px;height:80px;display:none;background-color:blue;"></div><br />
+<div id = flip>Click here to see slide</div>
+<button type = "button" id = "stop">Stop SlideDown</button>
+<div id = "panel" style = "padding : 50px;  background-color: #e5eecc; display :none; text-align: center;">Hello this is slideDown !</div>
+<div id = "testAnimation"style="background:#98bf21;height:100px;width:100px;position:relative;"></div><br>
+<div id = "testAnimation2"style="background:#98bf21;height:100px;width:100px;position:absolute;"></div>
+</body>
+</html>

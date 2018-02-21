@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JQuery Tutorial</title>
+    <!--Below is called CDN(Content Delivery Network)-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="jquery-3.3.1.min.js"></script>
+    <script>
+        //Basic syntax is: $(selector).action()
+        /*
+        $(this).hide() - hides the current element.
+
+        $("p").hide() - hides all <p> elements.
+
+        $(".test").hide() - hides all elements with class="test".
+
+        $("#test").hide() - hides the element with id="test".
+         */
+        //execute when the document is fully loaded
+
+        $(document).ready(function () {
+
+            $("button").click(function () {
+                //$("p").hide();
+                $("#test").hide();//id selector
+                $(".test").hide();//class selector
+                //$("tr:odd").css("background-color", "yellow");
+            });
+
+            $("p").dblclick(function () {
+                $(this).hide();
+            });
+
+            $("#test").mouseenter(function () {   //mouseleave
+                alert("You are enter the ID test");
+            });
+
+            $(".test").mousedown(function () {     //mouseup
+                alert("You are press buttons on mouse over test class");
+            });
+
+
+            /*
+            $("#p1").hover(function(){
+            alert("You entered p1!");
+            },
+            function(){
+            alert("Bye! You now leave p1!");
+             });
+            */
+
+            $("input").focus(function () {
+                $(this).css("background-color", "#cccccc");
+            });
+            $("input").blur(function () {
+                $(this).css("background-color", "#ffffff");
+            });
+            $("button.bToggle").dblclick(function(){
+                 $("#toggle").toggle("slow");
+            });
+/*
+            $("p").on({
+                mouseenter: function () {
+                    $(this).css("background-color", "lightgray");
+                },
+                mouseleave: function () {
+                    $(this).css("background-color", "lightblue");
+                },
+                click: function () {
+                    $(this).css("background-color", "yellow");
+                }
+            });
+
+*/
+        });
+
+
+        //Events
+
+
+    </script>
+</head>
+<body>
+<p id ="toggle">If you click on me, I will disappear.</p>
+<p class="test">Click me away!</p>
+<p id="test">Click me too!</p>
+<button type="button">Click here to hide the P tag elements</button>
+<button type = "button" class = "bToggle">Click here to test the Toggle Function</button>
+<br/>
+Enter Your name: <input type="text"><br/>
+Enter Your age : <input type="text"><br/>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQ_traversing</title>
+    <script src="jquery-3.3.1.min.js"></script>
+    <script>
+
+
+        /*
+           Ancestors: parent(), parents(), parentsUntil()
+           Descendants: children() find()
+           //The children() method returns all direct children of the selected element.
+           //The find() method returns descendant elements of the selected element, all the way down to the last descendant.
+           //find("*") returns all the descendants of the element
+         */
+
+
+        /*
+          Siblings:
+          siblings(): The siblings() method returns all sibling elements of the selected element. siblings("p") add a filter to  tag p only
+          next(): returns the next sibling element of the selected element.
+          nextAll(): returns all next sibling elements of the selected element
+          nextUntil(): returns all sibling elements between a <h2> and a <h6> element
+          prev(), prevAll, prevUntil all the szme but opposit
+        */
+
+        /*
+            first() : first() method returns the first element of the specified elements.
+            last(): returns the last element of the specified elements.
+            eq(): returns an element with a specific index number of the selected elements(index as parameter and start from 0 )
+            filter() : ets you specify a criteria. Elements that do not match the criteria are removed from the selection,
+            and those that match will be returned
+            not(): returns all elements that do not match the criteria
+         */
+    </script>
+    <script>
+        //AJAX
+        /*
+             The jQuery load() method is a simple, but powerful AJAX method.
+             The load() method loads data from a server and puts the returned data into the selected element.
+             $(selector).load(URL,data,callback);
+             The required URL parameter specifies the URL you wish to load.
+             The optional data parameter specifies a set of querystring key/value pairs to send along with the request.
+             The optional callback parameter is the name of a function to be executed after the load() method is completed.
+             $("#div1").load("demo_test.txt #p1"); This will only load id = p1 from the txt file
+
+             The optional callback parameter specifies a callback function to run when the load() method is completed.
+             The callback function can have different parameters:
+             responseTxt - contains the resulting content if the call succeeds
+             statusTxt - contains the status of the call
+             xhr - contains the XMLHttpRequest object
+         */
+        $(document).ready(function () {
+            $(".loadTest").click(function () {
+                $("#div1").load("demo_test.txt", function (responseTxt, statusTxt, xhr) {
+                    if (statusTxt == "success") {
+                        alert("External content loaded successfully!");
+                    }
+                    if (statusTxt == "error") {
+                        alert("Error: " + xhr.status + ": " + xhr.statusText);
+                    }
+                });
+            });
+        });
+        /*
+          The jQuery get() and post() methods are used to request data from the server with an HTTP GET or POST request
+          GET - Requests data from a specified resource
+          POST - Submits data to be processed to a specified resource
+          $.get(url, callback) The $.get() method requests data from the server with an HTTP GET request.
+          $.post(URL,data,callback);
+
+        */
+        $(document).ready(function () {
+
+            $("#testGet").click(function () {
+                $.get("demo_test.asp", function (data, status) {
+                    $(".showGet").text("Data: " + data + " status: " + status);
+                });
+            });
+
+
+            $("#testPost").click(function () {
+                $.post("demo_post.asp",
+                    {
+                        fname: "huafu",
+                        lname: "hu"
+                    },
+                    function (data, status) {
+                        document.getElementById("showPost").innerHTML = "Data inside is: " + data + " Status is: " + status;
+                    });
+            });
+
+            //Filterable Table
+        });
+
+       /*
+            You can use $.noConflict() to avoid using $ as a conflict sign, but jQuery
+            or for example
+            var jq = $.noConflict(); Then jq will be using as '$'.
+            If you have a block of jQuery code which uses the $ shortcut and you do not want to change it all,
+             you can pass the $ sign in as a parameter to the ready method.
+             This allows you to access jQuery using $, inside this function - outside of it, you will have to use "jQuery":
+
+             $.noConflict();
+            jQuery(document).ready(function($){
+             $("button").click(function(){
+                    $("p").text("jQuery is still working!");
+                });
+             });
+        */
+    </script>
+    <style>
+         table {
+             font-family: arial, sans-serif;
+             border-collapse: collapse;
+             width: 100%;
+         }
+        td, th{
+            border: 1px solid black;
+            text-align: left;
+            padding: 8px;
+        }
+         tr:nth-child(even) {
+             background-color: #dddddd;
+         }
+        </style>
+</head>
+<body>
+<div id="div1"><h2>Let jQuery AJAX Change This Text</h2></div>
+<button class = "loadTest"> Get AJAX operation</button>
+<br/>
+<button id="testGet">Send an HTTP GET request to a page and get the result back</button>
+<span class="showGet"></span><br/>
+<button id="testPost">Send an HTTP POST request to a page and get the result back</button>
+<br/>
+<div id="showPost"></div><br/>
+<h2>Filterable Table</h2>
+<p>Type something in the input field to search the table for first names, last names or emails:</p>
+<input id = "myInput" type = "text" placeholder = "Search..." onkeyup = "filter(this.value)">
+<br /><br />
+<table>
+    <thead>
+    <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Email</th>
+    </tr>
+    </thead>
+    <tbody id="myTable">
+    <tr>
+        <td>John</td>
+        <td>Doe</td>
+        <td>john@example.com</td>
+    </tr>
+    <tr>
+        <td>Mary</td>
+        <td>Moe</td>
+        <td>mary@mail.com</td>
+    </tr>
+    <tr>
+        <td>July</td>
+        <td>Dooley</td>
+        <td>july@greatstuff.com</td>
+    </tr>
+    <tr>
+        <td>Anja</td>
+        <td>Ravendale</td>
+        <td>a_r@test.com</td>
+    </tr>
+    </tbody>
+</table>
+<script>
+    function filter(str){
+         str = str.toLowerCase();
+         $("#myTable tr").filter(function(){
+             $(this).toggle($(this).text().toLowerCase().indexOf(str) > -1);
+         });
+    }
+</script>
+</body>
+</html>
