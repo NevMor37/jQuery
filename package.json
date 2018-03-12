@@ -1,0 +1,19 @@
+{
+  "name": "sobin",
+  "version": "1.0.0",
+  "description": "sobin's first js package",
+  "main": "jquery-3.3.1.min.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NevMor37/jQuery.git"
+  },
+  "author": "shubinwu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NevMor37/jQuery/issues"
+  },
+  "homepage": "https://github.com/NevMor37/jQuery#readme"
+}
